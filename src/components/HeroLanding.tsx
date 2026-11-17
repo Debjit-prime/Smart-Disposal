@@ -102,14 +102,27 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
   };
 
   return (
-    <div className="relative w-full bg-[#170f06]">
-      {/* Unmasked full-bleed botanical video/image & continuous extended soil ground */}
+    <div className="relative w-full bg-[#211409]">
+      {/* Continuous seamless soil ground extending from behind the feathered hero soil through the below-fold section */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-screen min-h-[100dvh] overflow-hidden z-0"
+        className="pointer-events-none absolute inset-x-0 top-[52vh] bottom-0 overflow-hidden z-0 [mask-image:linear-gradient(to_bottom,transparent_0px,black_220px,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0px,black_220px,black_100%)]"
       >
         <div
-          className="hero-bg animate-nature-drift pointer-events-none [mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)]"
+          className="w-full h-full bg-cover bg-top -scale-y-100 brightness-[0.74] contrast-[1.06]"
+          style={{
+            backgroundImage: `url('/src/assets/images/home_soil_smooth_extend_1794852543744.jpg')`,
+          }}
+        />
+      </div>
+
+      {/* Unmasked-top botanical video/image with outer non-scaled 56%->96% feather so drift scale never clips the fade */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[112vh] min-h-[840px] overflow-hidden z-0 [mask-image:linear-gradient(to_bottom,black_0%,black_56%,transparent_96%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_56%,transparent_96%)]"
+      >
+        <div
+          className="hero-bg animate-nature-drift pointer-events-none"
           style={{
             backgroundImage: `url('/assets/aistudio/image_1_1ba20a32.png')`,
           }}
@@ -128,15 +141,6 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
           </video>
         </div>
       </div>
-
-      {/* Continuous seamless soil ground extending from beneath the hero soil through the below-fold section */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[70vh] bottom-0 bg-cover bg-top z-0"
-        style={{
-          backgroundImage: `url('/src/assets/images/home_soil_smooth_extend_1794852543744.jpg')`,
-        }}
-      />
 
       {/* Foreground text & interactive layers smoothly fade clear of the fixed navbar on scroll */}
       <NavSafeMask className="relative z-10">

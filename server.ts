@@ -56,6 +56,23 @@ async function startServer() {
   const app = express();
   app.use(express.json({ limit: '10mb' }));
 
+  // Allow cross-origin calls when Vercel frontend connects to Render backend
+  app.use('/api', (req, res, next) => {
+    const allowedOrigin = process.env.FRONTEND_ORIGIN || '*';
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    if (req.method === 'OPTIONS') {
+      res.status(204).end();
+      return;
+    }
+    next();
+  });
+
+  app.get('/api/health', (_req, res) => {
+    res.json({ ok: true });
+  });
+
   app.post('/api/identify-product', async (req, res) => {
     try {
       const body = (req.body ?? {}) as IdentifyRequestBody;

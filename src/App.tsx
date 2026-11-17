@@ -161,6 +161,9 @@ export default function App() {
   };
 
   const handleSelectProduct = (product: ProductItem, searchLabel?: string) => {
+    setProducts((prev) =>
+      prev.some((p) => p.id === product.id) ? prev : [product, ...prev]
+    );
     setHistoryIds((prev) => [product.id, ...prev.filter((id) => id !== product.id)].slice(0, 12));
     if (searchLabel) {
       const clean = searchLabel.trim();

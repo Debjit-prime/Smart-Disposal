@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppPage } from '../types/disposal';
+import { NavSafeMask } from './GlassUI';
 
 interface FooterProps {
   onNavigate: (page: AppPage) => void;
@@ -8,6 +9,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="w-full px-6 md:px-12 lg:px-16 py-10 border-t border-white/20 bg-black relative z-10">
+      <NavSafeMask>
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
         <div className="space-y-1.5">
           <button
@@ -65,6 +67,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </button>
         </nav>
       </div>
+      </NavSafeMask>
     </footer>
   );
 };

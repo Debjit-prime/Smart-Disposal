@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Leaf, Ban, X, CheckCircle2, AlertCircle, Info } from 'lucide-react';
 import { ToastMessage } from '../types/disposal';
 
@@ -284,6 +284,66 @@ export const ResultSkeleton: React.FC = () => {
   );
 };
 
+export const NavSafeMask: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+}> = ({ children, className = '' }) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    let rafId: number | null = null;
+
+    const applyMask = () => {
+      rafId = null;
+      const scrollY = window.scrollY;
+      const rectTop = el.getBoundingClientRect().top;
+
+      // Clear mask completely at scroll top so above-the-fold hero is untouched
+      if (scrollY <= 1 && rectTop >= 0) {
+        el.style.maskImage = '';
+        el.style.webkitMaskImage = '';
+        return;
+      }
+
+      // Engage smoothly across the first 40px of scroll so text never clashes with fixed navbar
+      const p = Math.min(1, Math.max(0, scrollY / 40));
+      const clearViewportY = 82 * p;
+      const fadeViewportY = 132 * p;
+
+      const localClear = Math.max(0, clearViewportY - rectTop);
+      const localFade = Math.max(localClear + 1, fadeViewportY - rectTop);
+
+      const gradient = `linear-gradient(to bottom, transparent 0px, transparent ${localClear.toFixed(1)}px, black ${localFade.toFixed(1)}px, black 100%)`;
+      el.style.maskImage = gradient;
+      el.style.webkitMaskImage = gradient;
+    };
+
+    const scheduleUpdate = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(applyMask);
+    };
+
+    applyMask();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate, { passive: true });
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className={className}>
+      {children}
+    </div>
+  );
+};
+
 export const BlurredBackgroundLayer: React.FC<{
   imageUrl?: string;
   className?: string;
@@ -298,7 +358,7 @@ export const BlurredBackgroundLayer: React.FC<{
           aria-hidden="true"
         />
       )}
-      <div className="relative z-10 flex-1 flex flex-col">{children}</div>
+      <NavSafeMask className="relative z-10 flex-1 flex flex-col">{children}</NavSafeMask>
     </div>
   );
 };

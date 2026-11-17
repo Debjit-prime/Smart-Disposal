@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { AppPage, ProductItem } from '../types/disposal';
 import { CurvedCarousel, CurvedCarouselItem } from './CurvedCarousel';
 import { DemoTabId, LiveDemoPill } from './LiveDemoPill';
+import { NavSafeMask } from './GlassUI';
 
 interface HeroLandingProps {
   products: ProductItem[];
@@ -95,30 +96,23 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
   const scrollToBelowFold = () => {
     const el = document.getElementById('hero-below-fold');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const top = el.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
     }
   };
 
   return (
     <div className="relative w-full bg-[#170f06]">
-      {/* Continuous seamless soil ground extending from beneath the hero soil through the below-fold section */}
+      {/* Unmasked full-bleed botanical video/image & continuous extended soil ground */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[70vh] bottom-0 bg-cover bg-top"
-        style={{
-          backgroundImage: `url('/src/assets/images/home_soil_smooth_extend_1794852543744.jpg')`,
-        }}
-      />
-
-      <section aria-label="SmartDisposal hero" className="hero relative z-10 flex flex-col">
-        {/* Full-screen raw background image & looping muted video placeholder slot feathered smoothly at the bottom soil edge */}
+        className="pointer-events-none absolute inset-x-0 top-0 h-screen min-h-[100dvh] overflow-hidden z-0"
+      >
         <div
           className="hero-bg animate-nature-drift pointer-events-none [mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_78%,transparent_100%)]"
           style={{
             backgroundImage: `url('/assets/aistudio/image_1_1ba20a32.png')`,
           }}
-          role="img"
-          aria-label="Lush green forest foliage and young sprouts emerging from rich dark soil"
         >
           {/* Placeholder video slot: drop your looping muted .mp4 file source here to play over background */}
           <video
@@ -133,7 +127,20 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
             {/* <source src="/videos/foliage-soil-loop.mp4" type="video/mp4" /> */}
           </video>
         </div>
+      </div>
 
+      {/* Continuous seamless soil ground extending from beneath the hero soil through the below-fold section */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[70vh] bottom-0 bg-cover bg-top z-0"
+        style={{
+          backgroundImage: `url('/src/assets/images/home_soil_smooth_extend_1794852543744.jpg')`,
+        }}
+      />
+
+      {/* Foreground text & interactive layers smoothly fade clear of the fixed navbar on scroll */}
+      <NavSafeMask className="relative z-10">
+      <section aria-label="SmartDisposal hero" className="hero relative flex flex-col">
         {/* Hero content pinned to the bottom of the viewport with generous spacing */}
         <div className="relative z-10 flex-1 flex flex-col justify-end px-6 md:px-12 lg:px-16 pb-12 lg:pb-16 pt-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-end gap-6 lg:gap-8">
@@ -220,7 +227,7 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
       <section
         id="hero-below-fold"
         aria-label="What breaks down, and what doesn't"
-        className="w-full relative z-10 pt-8 pb-16 lg:pt-10 lg:pb-24 space-y-12 overflow-hidden"
+        className="w-full relative z-10 scroll-mt-24 pt-10 pb-16 lg:pt-12 lg:pb-24 space-y-12 overflow-hidden"
       >
         {/* Thin Glass Stats Strip */}
         <div className="relative z-10 px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
@@ -279,6 +286,7 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
           />
         </div>
       </section>
+      </NavSafeMask>
     </div>
   );
 };

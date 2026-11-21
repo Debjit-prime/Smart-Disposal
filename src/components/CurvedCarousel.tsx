@@ -326,12 +326,12 @@ export const CurvedCarousel: React.FC<CurvedCarouselProps> = ({
                   }}
                   aria-hidden="true"
                 />
-                <div className="relative z-10 h-full p-4 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/35 to-black/20">
+                <div className="relative z-10 h-full p-4 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/72 via-45% to-black/15">
                   <div className="space-y-1.5 mb-3">
                     {item.verdict && (
-                      <div className="inline-flex items-center gap-1.5 text-[11px] text-white font-medium">
+                      <div className="inline-flex items-center gap-1.5 text-[11px] text-white font-medium [text-shadow:0_1px_6px_rgba(0,0,0,0.95)]">
                         {item.verdict === 'biodegradable' ? (
-                          <Leaf className="w-3 h-3 text-white" aria-hidden="true" />
+                          <Leaf className="w-3 h-3 text-emerald-300" aria-hidden="true" />
                         ) : (
                           <Ban className="w-3 h-3 text-gray-200" aria-hidden="true" />
                         )}
@@ -340,15 +340,19 @@ export const CurvedCarousel: React.FC<CurvedCarouselProps> = ({
                         </span>
                       </div>
                     )}
-                    <div className="text-sm sm:text-base font-medium text-white leading-tight">
+                    <div className="text-sm sm:text-base font-semibold text-white leading-tight [text-shadow:0_1px_8px_rgba(0,0,0,0.95)]">
                       {item.title}
                     </div>
-                    <p className="text-xs text-gray-200 truncate">{item.meta}</p>
+                    <p className="text-xs font-medium text-gray-100 truncate [text-shadow:0_1px_6px_rgba(0,0,0,0.95)]">
+                      {item.meta}
+                    </p>
                     {item.secondaryMeta && (
-                      <p className="text-[11px] text-gray-300 truncate">{item.secondaryMeta}</p>
+                      <p className="text-[11px] text-gray-200 truncate [text-shadow:0_1px_6px_rgba(0,0,0,0.95)]">
+                        {item.secondaryMeta}
+                      </p>
                     )}
                   </div>
-                  <div className="w-8 h-8 rounded-full liquid-glass border border-white/25 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-full liquid-glass liquid-glass-readable border border-white/30 flex items-center justify-center shrink-0">
                     {renderBadgeIcon(item)}
                   </div>
                 </div>
@@ -430,12 +434,12 @@ export const CurvedCarousel: React.FC<CurvedCarouselProps> = ({
             />
 
             {/* Liquid-glass content surface over artwork */}
-            <div className="relative z-10 h-full w-full p-3.5 sm:p-4 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/35 to-black/20">
+            <div className="relative z-10 h-full w-full p-3.5 sm:p-4 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/72 via-45% to-black/15">
               <div className="space-y-1 mb-2.5 sm:mb-3 min-w-0">
                 {item.verdict && (
-                  <div className="inline-flex items-center gap-1.5 text-[11px] text-white font-medium [text-shadow:0_1px_6px_rgba(0,0,0,0.8)]">
+                  <div className="inline-flex items-center gap-1.5 text-[11px] text-white font-medium [text-shadow:0_1px_6px_rgba(0,0,0,0.95)]">
                     {item.verdict === 'biodegradable' ? (
-                      <Leaf className="w-3 h-3 text-white shrink-0" aria-hidden="true" />
+                      <Leaf className="w-3 h-3 text-emerald-300 shrink-0" aria-hidden="true" />
                     ) : (
                       <Ban className="w-3 h-3 text-gray-200 shrink-0" aria-hidden="true" />
                     )}
@@ -445,23 +449,23 @@ export const CurvedCarousel: React.FC<CurvedCarouselProps> = ({
                   </div>
                 )}
 
-                <div className="text-sm sm:text-base font-medium text-white leading-snug truncate [text-shadow:0_1px_8px_rgba(0,0,0,0.85)]">
+                <div className="text-sm sm:text-base font-semibold text-white leading-snug truncate [text-shadow:0_1px_8px_rgba(0,0,0,0.95)]">
                   {item.title}
                 </div>
 
-                <p className="text-[11px] sm:text-xs text-gray-200 truncate [text-shadow:0_1px_6px_rgba(0,0,0,0.85)]">
+                <p className="text-[11px] sm:text-xs font-medium text-gray-100 truncate [text-shadow:0_1px_6px_rgba(0,0,0,0.95)]">
                   {item.meta}
                 </p>
 
                 {item.secondaryMeta && (
-                  <p className="text-[11px] text-gray-300 truncate [text-shadow:0_1px_6px_rgba(0,0,0,0.85)]">
+                  <p className="text-[11px] text-gray-200 truncate [text-shadow:0_1px_6px_rgba(0,0,0,0.95)]">
                     {item.secondaryMeta}
                   </p>
                 )}
               </div>
 
               {/* Small frosted round icon at bottom-left */}
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full liquid-glass border border-white/25 flex items-center justify-center shrink-0">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full liquid-glass liquid-glass-readable border border-white/30 flex items-center justify-center shrink-0">
                 {renderBadgeIcon(item)}
               </div>
             </div>

@@ -125,8 +125,8 @@ export const DatabaseBrowser: React.FC<DatabaseBrowserProps> = ({
         <div className="space-y-4">
           <div className="flex flex-col lg:flex-row gap-3">
             {/* Search */}
-            <div className="liquid-glass rounded-xl border border-white/20 px-4 py-2.5 flex items-center gap-3 flex-1">
-              <Search className="w-4 h-4 text-gray-300 shrink-0" aria-hidden="true" />
+            <div className="liquid-glass liquid-glass-readable rounded-xl border border-white/25 px-4 py-2.5 flex items-center gap-3 flex-1">
+              <Search className="w-4 h-4 text-gray-200 shrink-0" aria-hidden="true" />
               <label htmlFor="db-search" className="sr-only">
                 Filter materials
               </label>
@@ -136,7 +136,7 @@ export const DatabaseBrowser: React.FC<DatabaseBrowserProps> = ({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Filter by product, material, or alternative..."
-                className="w-full bg-transparent text-sm text-white placeholder:text-gray-300 focus:outline-none"
+                className="w-full bg-transparent text-sm text-white placeholder:text-gray-200/80 focus:outline-none"
               />
             </div>
 
@@ -168,7 +168,7 @@ export const DatabaseBrowser: React.FC<DatabaseBrowserProps> = ({
                 id="db-sort"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortMode)}
-                className="w-full lg:w-auto liquid-glass border border-white/20 rounded-xl px-4 py-3 text-sm text-white bg-black focus:outline-none focus:border-white cursor-pointer"
+                className="w-full lg:w-auto liquid-glass liquid-glass-readable border border-white/25 rounded-xl px-4 py-3 text-sm font-medium text-white bg-black/80 focus:outline-none focus:border-white cursor-pointer"
               >
                 <option value="fastest" className="bg-black text-white">
                   Decomposition: Fastest first
@@ -199,8 +199,8 @@ export const DatabaseBrowser: React.FC<DatabaseBrowserProps> = ({
         {/* Filtered Grid Below */}
         {filtered.length === 0 ? (
           <GlassCard className="p-10 text-center space-y-4">
-            <h2 className="text-xl font-normal text-white">No materials match these filters</h2>
-            <p className="text-sm text-gray-300">
+            <h2 className="text-xl font-medium text-white">No materials match these filters</h2>
+            <p className="text-sm text-gray-200">
               Clear your search term or switch categories to inspect all items.
             </p>
             <div>
@@ -215,17 +215,19 @@ export const DatabaseBrowser: React.FC<DatabaseBrowserProps> = ({
               <GlassCard
                 key={item.id}
                 onClick={() => onSelectProduct(item)}
-                className="p-6 flex flex-col justify-between space-y-6 hover:border-white/40 transition-colors"
+                className="p-6 flex flex-col justify-between space-y-6 hover:border-white/50 transition-colors group"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-2 text-xs text-gray-300">
-                    <span>
+                  <div className="flex items-center justify-between gap-3 text-xs font-medium text-gray-200">
+                    <span className="truncate">
                       {item.category} · {item.subTopic}
                     </span>
-                    <span className="tabular-nums">{item.decompositionTime}</span>
+                    <span className="tabular-nums text-white/95 shrink-0">
+                      {item.decompositionTime}
+                    </span>
                   </div>
 
-                  <h2 className="text-xl font-normal tracking-[-0.03em] text-white">
+                  <h2 className="text-xl font-medium tracking-[-0.02em] text-white leading-snug">
                     {item.name}
                   </h2>
 
@@ -234,13 +236,16 @@ export const DatabaseBrowser: React.FC<DatabaseBrowserProps> = ({
                   </div>
                 </div>
 
-                <div className="pt-2 flex items-center justify-between gap-3">
+                <div className="pt-3.5 border-t border-white/15 flex items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-xs text-gray-300 truncate">
-                      Switch to {item.alternative.name}
+                    <p className="text-xs sm:text-sm text-gray-100 truncate">
+                      Switch to <span className="font-medium text-white">{item.alternative.name}</span>
                     </p>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-gray-300 shrink-0" aria-hidden="true" />
+                  <ArrowRight
+                    className="w-4 h-4 text-white/80 group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0"
+                    aria-hidden="true"
+                  />
                 </div>
               </GlassCard>
             ))}

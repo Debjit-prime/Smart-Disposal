@@ -24,7 +24,7 @@ export const GlassCard: React.FC<{
   return (
     <div
       {...interactiveProps}
-      className={`liquid-glass rounded-xl border border-white/20 ${
+      className={`liquid-glass liquid-glass-readable rounded-xl border border-white/25 ${
         onClick ? 'cursor-pointer transition-transform duration-200 hover:-translate-y-0.5' : ''
       } ${className}`}
     >
@@ -66,7 +66,7 @@ export const GlassButton: React.FC<
   return (
     <button
       {...props}
-      className={`inline-flex items-center justify-center gap-2 liquid-glass border border-white/20 rounded-lg font-medium transition-colors duration-200 whitespace-nowrap shrink-0 cursor-pointer ${
+      className={`inline-flex items-center justify-center gap-2 liquid-glass liquid-glass-readable border border-white/25 rounded-lg font-medium transition-colors duration-200 whitespace-nowrap shrink-0 cursor-pointer ${
         active
           ? 'bg-white text-black'
           : 'text-white hover:bg-white hover:text-black'
@@ -83,14 +83,14 @@ export const VerdictBadge: React.FC<{
 }> = ({ biodegradable, compact = false }) => {
   return (
     <span
-      className={`inline-flex items-center gap-2 liquid-glass border border-white/20 rounded-lg text-white whitespace-nowrap shrink-0 ${
-        compact ? 'px-3 py-1 text-xs' : 'px-3.5 py-1.5 text-sm font-medium'
+      className={`inline-flex items-center gap-2 liquid-glass liquid-glass-readable border border-white/25 rounded-lg text-white font-medium whitespace-nowrap shrink-0 ${
+        compact ? 'px-3 py-1 text-xs' : 'px-3.5 py-1.5 text-sm'
       }`}
     >
       {biodegradable ? (
-        <Leaf className="w-3.5 h-3.5 text-white shrink-0" aria-hidden="true" />
+        <Leaf className="w-3.5 h-3.5 text-emerald-300 shrink-0" aria-hidden="true" />
       ) : (
-        <Ban className="w-3.5 h-3.5 text-gray-300 shrink-0" aria-hidden="true" />
+        <Ban className="w-3.5 h-3.5 text-gray-200 shrink-0" aria-hidden="true" />
       )}
       <span>{biodegradable ? 'Biodegradable' : 'Not biodegradable'}</span>
     </span>
@@ -107,10 +107,10 @@ export const FilterChip: React.FC<{
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`px-4 py-2 text-xs sm:text-sm rounded-lg border transition-colors duration-200 whitespace-nowrap shrink-0 cursor-pointer ${
+      className={`px-4 py-2 text-xs sm:text-sm rounded-lg border font-medium transition-colors duration-200 whitespace-nowrap shrink-0 cursor-pointer ${
         active
-          ? 'bg-white text-black border-white font-medium'
-          : 'liquid-glass border-white/20 text-white hover:bg-white hover:text-black'
+          ? 'bg-white text-black border-white'
+          : 'liquid-glass liquid-glass-readable border-white/25 text-white hover:bg-white hover:text-black'
       }`}
     >
       {label}
@@ -162,7 +162,7 @@ export const GlassInput: React.FC<
   return (
     <input
       {...props}
-      className={`w-full liquid-glass border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-300 focus:outline-none focus:border-white transition-colors ${containerClassName} ${className}`}
+      className={`w-full liquid-glass liquid-glass-readable border border-white/25 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-200/80 focus:outline-none focus:border-white transition-colors ${containerClassName} ${className}`}
     />
   );
 };

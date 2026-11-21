@@ -58,15 +58,15 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
     <section className="w-full py-12 lg:py-16 space-y-12 overflow-hidden">
       {/* Clean editorial banner with sunlit bamboo/ceramic/linen visual */}
       <div className="px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
-        <GlassCard className="overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
+        <GlassCard className="overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch bg-black/78">
           <div className="lg:col-span-6 p-8 sm:p-10 flex flex-col justify-center space-y-4">
-            <p className="text-xs text-gray-300 tabular-nums">
+            <p className="text-xs font-medium text-gray-200 tabular-nums">
               {prioritized.length} material swaps
             </p>
             <h1 className="text-4xl md:text-5xl font-normal tracking-[-0.04em] text-white">
               Greener Alternatives
             </h1>
-            <p className="text-base text-gray-300 leading-relaxed max-w-xl">
+            <p className="text-base text-gray-100 leading-relaxed max-w-xl">
               Practical everyday swaps that replace persistent synthetic waste with compostable or
               endlessly reusable materials.
             </p>
@@ -88,7 +88,7 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
       {/* Curved Horizontal Scroll Carousel for Greener Alternatives */}
       <div className="space-y-4">
         <div className="px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
-          <p className="text-xs text-gray-100 [text-shadow:0_1px_10px_rgba(0,0,0,0.9)]">
+          <p className="text-xs sm:text-sm font-medium text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.95),0_1px_3px_rgba(0,0,0,0.95)]">
             Drag, scroll, or use arrow keys to explore swaps — select any card to inspect
           </p>
         </div>
@@ -107,7 +107,7 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
 
       {/* Side-by-side Swap Comparison Grid */}
       <div className="px-6 md:px-12 lg:px-16 max-w-7xl mx-auto space-y-6">
-        <p className="text-xs text-gray-100 [text-shadow:0_1px_10px_rgba(0,0,0,0.9)]">
+        <p className="text-xs sm:text-sm font-medium text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.95),0_1px_3px_rgba(0,0,0,0.95)]">
           Side-by-side swap comparison ({prioritized.length})
         </p>
 
@@ -117,37 +117,39 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
             return (
               <GlassCard
                 key={item.id}
-                className="p-6 sm:p-8 flex flex-col justify-between space-y-6"
+                className="p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-black/78"
               >
                 <div className="space-y-5">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-xs text-gray-300">{item.category}</span>
+                    <span className="text-xs font-medium text-gray-200">{item.category}</span>
                     <VerdictBadge biodegradable={item.biodegradable} compact />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="space-y-1">
-                      <p className="text-xs text-gray-300">Instead of</p>
+                    <div className="space-y-1.5">
+                      <p className="text-xs font-medium text-gray-200">Instead of</p>
                       <button
                         type="button"
                         onClick={() => onSelectProduct(item)}
-                        className="text-left text-lg font-normal text-white hover:text-gray-300 transition-colors cursor-pointer"
+                        className="text-left text-lg font-medium text-white hover:text-gray-200 transition-colors cursor-pointer"
                       >
                         {item.name}
                       </button>
-                      <p className="text-xs text-gray-300 tabular-nums">{item.decompositionTime}</p>
+                      <p className="text-xs sm:text-sm text-gray-200 tabular-nums">
+                        {item.decompositionTime}
+                      </p>
                     </div>
 
-                    <div className="space-y-1 sm:border-l sm:border-white/20 sm:pl-5">
-                      <p className="text-xs text-gray-300">Switch to</p>
-                      <p className="text-lg font-normal text-white">{item.alternative.name}</p>
-                      <p className="text-xs text-gray-300 tabular-nums">
+                    <div className="space-y-1.5 sm:border-l sm:border-white/25 sm:pl-5">
+                      <p className="text-xs font-medium text-emerald-300">Switch to</p>
+                      <p className="text-lg font-medium text-white">{item.alternative.name}</p>
+                      <p className="text-xs sm:text-sm text-gray-200 tabular-nums">
                         {item.alternative.decompositionTime}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-300 leading-relaxed">{item.alternative.reason}</p>
+                  <p className="text-sm text-gray-100 leading-relaxed">{item.alternative.reason}</p>
                 </div>
 
                 <div className="pt-4 border-t border-white/20 flex flex-wrap items-center justify-between gap-3">

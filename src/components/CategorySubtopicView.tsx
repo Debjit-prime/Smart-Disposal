@@ -132,10 +132,10 @@ export const CategorySubtopicView: React.FC<CategorySubtopicViewProps> = ({
 
         {displayedProducts.length === 0 ? (
           <GlassCard className="p-8 text-center space-y-3">
-            <h2 className="text-xl font-normal text-white">
+            <h2 className="text-xl font-medium text-white">
               No items logged under {selectedSubTopic} yet
             </h2>
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-gray-200">
               Show all {category} items or select another sub-topic card above.
             </p>
             <div>
@@ -150,26 +150,31 @@ export const CategorySubtopicView: React.FC<CategorySubtopicViewProps> = ({
               <GlassCard
                 key={item.id}
                 onClick={() => onSelectProduct(item)}
-                className="p-6 flex flex-col justify-between space-y-6 hover:border-white/40 transition-colors"
+                className="p-6 flex flex-col justify-between space-y-6 hover:border-white/50 transition-colors group"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-2 text-xs text-gray-300">
-                    <span>
+                  <div className="flex items-center justify-between gap-3 text-xs font-medium text-gray-200">
+                    <span className="truncate">
                       {item.category} · {item.subTopic}
                     </span>
-                    <span className="tabular-nums">{item.decompositionTime}</span>
+                    <span className="tabular-nums text-white/95 shrink-0">
+                      {item.decompositionTime}
+                    </span>
                   </div>
-                  <h2 className="text-xl font-normal tracking-[-0.03em] text-white">
+                  <h2 className="text-xl font-medium tracking-[-0.02em] text-white leading-snug">
                     {item.name}
                   </h2>
                   <VerdictBadge biodegradable={item.biodegradable} compact />
                 </div>
 
-                <div className="pt-2 flex items-center justify-between gap-3">
-                  <p className="text-xs text-gray-300 truncate">
-                    Switch to {item.alternative.name}
+                <div className="pt-3.5 border-t border-white/15 flex items-center justify-between gap-3">
+                  <p className="text-xs sm:text-sm text-gray-100 truncate">
+                    Switch to <span className="font-medium text-white">{item.alternative.name}</span>
                   </p>
-                  <ArrowRight className="w-4 h-4 text-gray-300 shrink-0" aria-hidden="true" />
+                  <ArrowRight
+                    className="w-4 h-4 text-white/80 group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0"
+                    aria-hidden="true"
+                  />
                 </div>
               </GlassCard>
             ))}
